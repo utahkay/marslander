@@ -300,7 +300,7 @@
     </group>
   </component>
   <component name="ProjectDetails">
-    <option name="projectName" value="animation" />
+    <option name="projectName" value="moonlander" />
   </component>
   <component name="ProjectFileVersion" converted="true">
     <converter id="javaee-modules" />
@@ -308,11 +308,11 @@
     <converter id="SelenaRunConfToDiana" />
   </component>
   <component name="ProjectKey">
-    <option name="state" value="project:///Users/kayjohansen/projects/java/swing/animation/animation.ipr" />
+    <option name="state" value="project:///Users/kayjohansen/projects/java/swing/moonlander/moonlander.ipr" />
   </component>
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/animation.iml" filepath="$PROJECT_DIR$/animation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/moonlander.iml" filepath="$PROJECT_DIR$/moonlander.iml" />
     </modules>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_5" assert-keyword="true" jdk-15="true" project-jdk-name="1.5" project-jdk-type="JavaSDK">
