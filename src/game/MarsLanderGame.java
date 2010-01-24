@@ -6,14 +6,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class MoonLanderGame extends JComponent implements SpriteContainer {
-    private MoonLander lander;
+public class MarsLanderGame extends JComponent implements SpriteContainer {
+    private MarsLander lander;
     private Astronaut astronaut;
     private boolean jetIsFiring;
     private static final double JET_ACCELERATION = 0.005;
     private static final double CRASH_VELOCITY = 0.2;
 
-    public MoonLanderGame(int width, int height) {
+    public MarsLanderGame(int width, int height) {
         setPreferredSize(new Dimension(width, height));
         setBounds(0,0,width, height);
         startGame();
@@ -82,8 +82,8 @@ public class MoonLanderGame extends JComponent implements SpriteContainer {
         lander.setAcceleration(acc);
     }
 
-    private MoonLander createLanderSprite() {
-        MoonLander sprite = new MoonLander();
+    private MarsLander createLanderSprite() {
+        MarsLander sprite = new MarsLander();
         sprite.setContainer(this);
         sprite.setBounds(getBounds());
         return sprite;
@@ -111,7 +111,7 @@ public class MoonLanderGame extends JComponent implements SpriteContainer {
         JFrame frame = new JFrame();
         frame.setLayout(new FlowLayout());
 
-        final MoonLanderGame component = new MoonLanderGame(450,450);
+        final MarsLanderGame component = new MarsLanderGame(450,450);
         frame.add(component);
 
         final JPanel controlPanel = new JPanel();

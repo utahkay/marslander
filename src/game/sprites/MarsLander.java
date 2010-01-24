@@ -7,7 +7,7 @@ import java.awt.*;
 /**
  * Copyright (c) 2008 Kay Johansen
  */
-public class MoonLander extends BasicSprite {
+public class MarsLander extends BasicSprite {
     private static final String LANDER_IMAGE_PATH = "images/moonlander.gif";
     private static final String FLAMES_IMAGE_PATH = "images/RocketFlame.jpg";
     private static final String CRASH_IMAGE_PATH = "images/Explosion.gif";
@@ -15,7 +15,7 @@ public class MoonLander extends BasicSprite {
     private Image landerWithFlame;
     private Image crash;
 
-    public MoonLander() {
+    public MarsLander() {
         loadImages();
         showLander();
     }
