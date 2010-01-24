@@ -1,14 +1,12 @@
 package game.sprites;
 
-import game.SpriteContainer;
-
 import java.awt.*;
 
 /**
  * Copyright (c) 2008 Kay Johansen
  */
 public class MarsLander extends BasicSprite {
-    private static final String LANDER_IMAGE_PATH = "images/moonlander.gif";
+    private static final String LANDER_IMAGE_PATH = "images/lander.gif";
     private static final String FLAMES_IMAGE_PATH = "images/RocketFlame.jpg";
     private static final String CRASH_IMAGE_PATH = "images/Explosion.gif";
     private Image lander;
