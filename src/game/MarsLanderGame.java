@@ -83,8 +83,7 @@ public class MarsLanderGame extends JComponent implements SpriteContainer {
     }
 
     private MarsLander createLanderSprite() {
-        MarsLander sprite = new MarsLander();
-        sprite.setContainer(this);
+        MarsLander sprite = new MarsLander(new SpriteImageManager(), this);
         sprite.setBounds(getBounds());
         return sprite;
     }
@@ -92,8 +91,7 @@ public class MarsLanderGame extends JComponent implements SpriteContainer {
     private Astronaut createAstronautSprite() {
         SpriteVector position = lander.getPosition();
         position.x += lander.getSpriteSize()/2;
-        Astronaut sprite = new Astronaut();
-        sprite.setContainer(this);
+        Astronaut sprite = new Astronaut(new SpriteImageManager(), this);
         sprite.setBounds(getBounds());
         sprite.setPosition(position);
         sprite.setVelocity(new SpriteVector(0.15, 0.0));

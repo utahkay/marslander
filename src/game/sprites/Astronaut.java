@@ -1,5 +1,8 @@
 package game.sprites;
 
+import game.ImageManager;
+import game.SpriteContainer;
+
 import java.awt.*;
 
 /**
@@ -8,12 +11,14 @@ import java.awt.*;
 public class Astronaut extends BasicSprite {
     private final static String ASTRONAUT_IMAGE_PATH = "images/astronaut.gif";
     private final static String ASTRONAUT__WITH_FLAG_IMAGE_PATH = "images/astronaut_flag.gif";
-    private Image astronaut;
-    private Image astronautWithFlag;
+    private final Image astronaut;
+    private final Image astronautWithFlag;
     private int astronautSteps = 0;
 
-    public Astronaut() {
-        loadImages();
+    public Astronaut(final ImageManager images, final SpriteContainer container) {
+        super(container);
+        astronaut = images.load(ASTRONAUT_IMAGE_PATH);
+        astronautWithFlag = images.load(ASTRONAUT__WITH_FLAG_IMAGE_PATH);
         showAstronaut();
     }
 
@@ -23,11 +28,6 @@ public class Astronaut extends BasicSprite {
 
     public void showAstronautWithFlag() {
         setImage(astronautWithFlag);
-    }
-
-    private void loadImages() {
-        astronaut = Images.loadImage(ASTRONAUT_IMAGE_PATH);
-        astronautWithFlag = Images.loadImage(ASTRONAUT__WITH_FLAG_IMAGE_PATH);
     }
 
     protected void spriteStep() {

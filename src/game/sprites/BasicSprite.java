@@ -9,7 +9,7 @@ import java.awt.image.ImageObserver;
  * Copyright (c) 2008 Kay Johansen
  */
 public class BasicSprite implements Sprite {
-    private SpriteContainer container;
+    private final SpriteContainer container;
     private Image image;
     private int spriteSize;
     private double x, y;
@@ -21,7 +21,7 @@ public class BasicSprite implements Sprite {
     private static final long TIME_INTERVAL_MILLIS = 4;
     protected volatile boolean stopRequest;
 
-    public void setContainer(SpriteContainer container) {
+    public BasicSprite(SpriteContainer container) {
         this.container = container;
     }
 

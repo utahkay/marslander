@@ -1,5 +1,8 @@
 package game.sprites;
 
+import game.ImageManager;
+import game.SpriteContainer;
+
 import java.awt.*;
 
 /**
@@ -9,12 +12,15 @@ public class MarsLander extends BasicSprite {
     private static final String LANDER_IMAGE_PATH = "images/lander.gif";
     private static final String FLAMES_IMAGE_PATH = "images/RocketFlame.jpg";
     private static final String CRASH_IMAGE_PATH = "images/Explosion.gif";
-    private Image lander;
-    private Image landerWithFlame;
-    private Image crash;
+    private final Image lander;
+    private final Image landerWithFlame;
+    private final Image crash;
 
-    public MarsLander() {
-        loadImages();
+    public MarsLander(final ImageManager images, final SpriteContainer container) {
+        super(container);
+        lander = images.load(LANDER_IMAGE_PATH);
+        landerWithFlame = images.concatImagesVertically(lander, images.load(FLAMES_IMAGE_PATH));
+        crash = images.load(CRASH_IMAGE_PATH);
         showLander();
     }
 
@@ -29,12 +35,6 @@ public class MarsLander extends BasicSprite {
 
     public void showCrash() {
         setImage(crash);
-    }
-
-    private void loadImages() {
-        lander = Images.loadImage(LANDER_IMAGE_PATH);
-        landerWithFlame = Images.concatImagesVertically(lander, Images.loadImage(FLAMES_IMAGE_PATH));
-        crash = Images.loadImage(CRASH_IMAGE_PATH);
     }
 
 }
