@@ -13,7 +13,7 @@ public class BasicSprite implements Sprite {
     private Image image;
     private int spriteSize;
     private double x, y;
-    public double x_velocity, y_velocity;
+    private double x_velocity, y_velocity;
     private double x_acc, y_acc;
     private double friction_loss;
     private static final int OFFSET_Y = 30;
