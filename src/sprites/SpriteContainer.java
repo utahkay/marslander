@@ -1,4 +1,4 @@
-package game;
+package sprites;
 
 /**
  * Copyright (c) 2008 Kay Johansen

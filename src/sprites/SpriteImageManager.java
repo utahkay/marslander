@@ -1,6 +1,4 @@
-package game.sprites;
-
-import game.ImageManager;
+package sprites;
 
 import javax.swing.*;
 import java.awt.*;

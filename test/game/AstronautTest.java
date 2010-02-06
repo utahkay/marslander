@@ -1,4 +1,4 @@
-package game.sprites;
+package game;
 
 import org.junit.Test;
 import org.junit.Before;
@@ -8,7 +8,8 @@ import static org.mockito.Mockito.*;
 
 import java.awt.*;
 
-import game.ImageManager;
+import sprites.ImageManager;
+import game.Astronaut;
 
 
 /**

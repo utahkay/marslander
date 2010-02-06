@@ -1,4 +1,4 @@
-package game.sprites;
+package sprites;
 
 import java.awt.*;
 import java.awt.image.ImageObserver;

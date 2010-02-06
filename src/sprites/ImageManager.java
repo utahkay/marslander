@@ -1,4 +1,4 @@
-package game;
+package sprites;
 
 import java.awt.*;
 

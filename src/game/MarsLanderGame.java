@@ -1,10 +1,12 @@
 package game;
 
-import game.sprites.*;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+
+import sprites.SpriteImageManager;
+import sprites.SpriteVector;
+import sprites.SpriteContainer;
 
 public class MarsLanderGame extends JComponent implements SpriteContainer {
     private final GameManager gameManager;

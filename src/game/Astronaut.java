@@ -1,9 +1,12 @@
-package game.sprites;
+package game;
 
-import game.ImageManager;
-import game.SpriteContainer;
+import sprites.ImageManager;
+import sprites.SpriteContainer;
 
 import java.awt.*;
+
+import sprites.BasicSprite;
+import sprites.SpriteVector;
 
 /**
  * Copyright (c) 2008 Kay Johansen
