@@ -21,23 +21,18 @@ public class BasicSprite implements Sprite {
     private static final long TIME_INTERVAL_MILLIS = 4;
     protected volatile boolean stopRequest;
 
-    public BasicSprite(SpriteContainer container) {
+    public BasicSprite(final SpriteContainer container) {
         this.container = container;
     }
 
-    public void setImage(Image image) {
-        this.image = image;
-        setSpriteSize(image.getHeight(null));
-    }
-
-    public void paint(Graphics g, ImageObserver observer) {
-        int drawX = (int)(x- spriteSize /2);
-        int drawY = (int)(y- spriteSize /2-OFFSET_Y);
+    public void paint(final Graphics g, final ImageObserver observer) {
+        final int drawX = (int)(x - spriteSize/2);
+        final int drawY = (int)(y - spriteSize/2 - OFFSET_Y);
         g.drawImage(image, drawX, drawY, observer);
     }
 
     public void start() {
-        Runnable r = new Runnable() {
+        final Runnable r = new Runnable() {
             public void run() {
                 try {
                     spriteStep();
@@ -49,7 +44,7 @@ public class BasicSprite implements Sprite {
         };
 
         stopRequest = false;
-        Thread thread = new Thread(r);
+        final Thread thread = new Thread(r);
         thread.start();
     }
 
@@ -57,65 +52,70 @@ public class BasicSprite implements Sprite {
         stopRequest = true;
     }
 
-    public void setSpriteSize(int size) {
-        spriteSize = size;
-    }
-
     public int getSpriteSize() {
         return spriteSize;
     }
 
-    public void setPosition(SpriteVector position) {
-        x = position.x;
-        y = position.y;
+    public void setSpriteSize(final int size) {
+        spriteSize = size;
     }
 
     public SpriteVector getPosition() {
         return new SpriteVector(x, y);
     }
 
-    public void setVelocity(SpriteVector v) {
-        x_velocity = v.x;
-        y_velocity = v.y;
+    public void setPosition(final SpriteVector position) {
+        x = position.x;
+        y = position.y;
     }
 
     public SpriteVector getVelocity() {
         return new SpriteVector(x_velocity, y_velocity);
     }
 
-    public void setAcceleration(SpriteVector acc) {
-        x_acc = acc.x;
-        y_acc = acc.y;
+    public void setVelocity(final SpriteVector v) {
+        x_velocity = v.x;
+        y_velocity = v.y;
     }
 
     public SpriteVector getAcceleration() {
         return new SpriteVector(x_acc, y_acc);
     }
 
-    public void setCollisionLoss(double f) {
+    public void setAcceleration(final SpriteVector acc) {
+        x_acc = acc.x;
+        y_acc = acc.y;
+    }
+
+    public void setCollisionLoss(final double f) {
         friction_loss = f;
     }
 
-    public void setBounds(Rectangle bounds) {
+    public void setImage(final Image image) {
+        this.image = image;
+        setSpriteSize(image.getHeight(null));
+    }
+
+    public void setBounds(final Rectangle bounds) {
         this.bounds = bounds;
     }
 
-    public void hitTop() {
+    protected void hitTop() {
         y_velocity = -(y_velocity*friction_loss);
         x_velocity *= friction_loss;
     }
 
-    public void hitBottom() {
+    protected void hitBottom() {
         container.hitBottom(y_velocity);
         hitTop();
     }
 
-    public void hitLeft() {
+    protected void hitLeft() {
         x_velocity = -(x_velocity*friction_loss);
         y_velocity *= friction_loss;
     }
 
-    public void hitRight() {
+    protected void hitRight() {
         hitLeft();
     }
 
@@ -128,8 +128,8 @@ public class BasicSprite implements Sprite {
     }
 
     protected void updatePosition() {
-        double spriteTop = y + y_velocity - spriteSize /2;
-        double spriteBottom = y + y_velocity + spriteSize /2;
+        final double spriteTop = y + y_velocity - spriteSize /2;
+        final double spriteBottom = y + y_velocity + spriteSize /2;
         if (spriteTop <= 0) {
             hitTop();
         } else if (spriteBottom >= bounds.getHeight()) {
@@ -138,8 +138,8 @@ public class BasicSprite implements Sprite {
             y_velocity += y_acc;
         }
 
-        double spriteLeft = x + x_velocity - spriteSize /2;
-        double spriteRight = x + x_velocity + spriteSize /2;
+        final double spriteLeft = x + x_velocity - spriteSize /2;
+        final double spriteRight = x + x_velocity + spriteSize /2;
         if (spriteLeft <= 0) {
             hitLeft();
         } else if (spriteRight >= bounds.getWidth()) {
