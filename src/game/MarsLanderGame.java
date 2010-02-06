@@ -2,21 +2,20 @@ package game;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 
 import sprites.SpriteImageManager;
 import sprites.SpriteVector;
 import sprites.SpriteContainer;
 
 public class MarsLanderGame extends JComponent implements SpriteContainer {
-    private final GameManager gameManager;
+    private final IGameManager gameManager;
     private MarsLander lander;
     private Astronaut astronaut;
     private boolean isJetFiring;
     private static final double JET_ACCELERATION = 0.005;
     private static final double CRASH_VELOCITY = 0.2;
 
-    public MarsLanderGame(int width, int height, GameManager manager) {
+    public MarsLanderGame(int width, int height, IGameManager manager) {
         this.gameManager = manager;
         setPreferredSize(new Dimension(width, height));
         setBounds(0,0,width, height);
@@ -134,85 +133,10 @@ public class MarsLanderGame extends JComponent implements SpriteContainer {
     }
 
     public static void main(String[] args) {
-        JFrame frame = new MarsLanderGameFrame();
+        JFrame frame = new GameFrame();
         frame.setSize(600,450);
         frame.setVisible(true);
     }
 
 }
 
-class MarsLanderGameFrame extends JFrame implements GameManager {
-    private final MarsLanderGame game;
-    private final JLabel gamesWon;
-    private final JLabel gamesLost;
-    private int numberGamesWon = 0;
-    private int numberGamesLost = 0;
-
-    public MarsLanderGameFrame() {
-        setLayout(new FlowLayout());
-
-        game = new MarsLanderGame(450, 450, this);
-        add(game);
-
-        final JPanel controlPanel = new JPanel();
-        controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.Y_AXIS));
-
-        JButton startOverButton = new JButton("Start Over");
-        gamesWon = new JLabel();
-        gamesLost = new JLabel();
-        controlPanel.add(gamesWon);
-        controlPanel.add(gamesLost);
-        controlPanel.add(startOverButton);
-        updateGameStats();
-        getRootPane().setDefaultButton(startOverButton);
-
-        add(controlPanel);
-
-        startOverButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                game.restart();
-            }
-        });
-
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                System.exit(0);
-            }
-        });
-
-        addWindowFocusListener(new WindowAdapter() {
-            @Override
-            public void windowGainedFocus(WindowEvent e) {
-                game.requestFocusInWindow();
-            }
-        });
-
-        game.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                game.keyPressed();
-            }
-            @Override
-            public void keyReleased(KeyEvent e) {
-                game.keyReleased();
-            }
-        });
-
-    }
-
-    public void gameWon() {
-        numberGamesWon++;
-        updateGameStats();
-    }
-
-    public void gameLost() {
-        numberGamesLost++;
-        updateGameStats();
-    }
-
-    private void updateGameStats() {
-        gamesWon.setText("Games Won: " + numberGamesWon);
-        gamesLost.setText("Games Lost: " + numberGamesLost);        
-    }
-}
