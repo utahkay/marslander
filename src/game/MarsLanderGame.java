@@ -9,7 +9,7 @@ import java.awt.event.*;
 public class MarsLanderGame extends JComponent implements SpriteContainer {
     private MarsLander lander;
     private Astronaut astronaut;
-    private boolean jetIsFiring;
+    private boolean isJetFiring;
     private static final double JET_ACCELERATION = 0.005;
     private static final double CRASH_VELOCITY = 0.2;
 
@@ -28,7 +28,7 @@ public class MarsLanderGame extends JComponent implements SpriteContainer {
     }
 
     private void setInitalParameters() {
-        jetIsFiring = false;
+        isJetFiring = false;
         lander.showLander();
         lander.setPosition(new SpriteVector(100.0, 100.0));
         lander.setVelocity(new SpriteVector(0.095, 0.0));
@@ -55,19 +55,19 @@ public class MarsLanderGame extends JComponent implements SpriteContainer {
     }
 
     public void keyPressed() {
-        if (!jetIsFiring) {
+        if (!isJetFiring && astronaut == null) {
             jetOn();
         }
     }
 
     public void keyReleased() {
-        if (jetIsFiring) {
+        if (isJetFiring) {
             jetOff();
         }
     }
 
     private void jetOn() {
-        jetIsFiring = true;
+        isJetFiring = true;
         lander.showLanderWithFlame();
         SpriteVector acc = lander.getAcceleration();
         acc.y -= JET_ACCELERATION;
@@ -75,7 +75,7 @@ public class MarsLanderGame extends JComponent implements SpriteContainer {
     }
 
     private void jetOff() {
-        jetIsFiring = false;
+        isJetFiring = false;
         lander.showLander();
         SpriteVector acc = lander.getAcceleration();
         acc.y += JET_ACCELERATION;
@@ -155,7 +155,10 @@ public class MarsLanderGame extends JComponent implements SpriteContainer {
     }
 
 
-    public void hitBottom(double velocity) {
+    public void hitBottom(final double velocity) {
+        if (isJetFiring) {
+            jetOff();
+        }
         if (velocity >= CRASH_VELOCITY) {
             showLoss();
         } else {
