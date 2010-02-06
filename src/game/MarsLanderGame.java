@@ -39,7 +39,7 @@ public class MarsLanderGame extends JComponent implements SpriteContainer {
     }
 
     @Override
-    public void paint(Graphics g) {
+    public void paintComponent(Graphics g) {
         lander.paint(g, this);
         if (astronaut != null) {
             astronaut.paint(g, this);
