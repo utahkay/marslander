@@ -22,6 +22,7 @@ public interface Sprite {
 
     SpriteVector getAcceleration();
     void setAcceleration(SpriteVector acc);
+    void changeAcceleration(SpriteVector deltaAcceleration);
 
     void setCollisionLoss(double f);
 }

@@ -69,17 +69,13 @@ public class MarsLanderGame extends JComponent implements SpriteContainer {
     private void jetOn() {
         isJetFiring = true;
         lander.showLanderWithFlame();
-        SpriteVector acc = lander.getAcceleration();
-        acc.y -= JET_ACCELERATION;
-        lander.setAcceleration(acc);
+        lander.changeAcceleration(new SpriteVector(0, -JET_ACCELERATION));
     }
 
     private void jetOff() {
         isJetFiring = false;
         lander.showLander();
-        SpriteVector acc = lander.getAcceleration();
-        acc.y += JET_ACCELERATION;
-        lander.setAcceleration(acc);
+        lander.changeAcceleration(new SpriteVector(0, JET_ACCELERATION));
     }
 
     private MarsLander createLanderSprite() {

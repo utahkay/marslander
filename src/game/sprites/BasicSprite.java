@@ -87,6 +87,11 @@ public class BasicSprite implements Sprite {
         y_acc = acc.y;
     }
 
+    public void changeAcceleration(final SpriteVector deltaAcceleration) {
+        x_acc += deltaAcceleration.x;
+        y_acc += deltaAcceleration.y;
+    }
+
     public void setCollisionLoss(final double f) {
         friction_loss = f;
     }
