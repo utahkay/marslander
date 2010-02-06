@@ -7,15 +7,15 @@ import sprites.SpriteImageManager;
 import sprites.SpriteVector;
 import sprites.SpriteContainer;
 
-public class MarsLanderGame extends JComponent implements SpriteContainer {
-    private final IGameManager gameManager;
+public class Game extends JComponent implements SpriteContainer {
+    private final GameManager gameManager;
     private MarsLander lander;
     private Astronaut astronaut;
     private boolean isJetFiring;
     private static final double JET_ACCELERATION = 0.005;
     private static final double CRASH_VELOCITY = 0.2;
 
-    public MarsLanderGame(int width, int height, IGameManager manager) {
+    public Game(int width, int height, GameManager manager) {
         this.gameManager = manager;
         setPreferredSize(new Dimension(width, height));
         setBounds(0,0,width, height);

@@ -3,6 +3,6 @@ package game;
 /**
  * Copyright (c) 2008 Kay Johansen
  */
-public interface GameStats {
+public interface GameStatsUI {
     void updateGameStats(int numberGamesWon, int numberGamesLost);
 }

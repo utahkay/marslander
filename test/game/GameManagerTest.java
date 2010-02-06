@@ -8,8 +8,8 @@ import static org.mockito.Mockito.verify;
  * Copyright (c) 2008 Kay Johansen
  */
 public class GameManagerTest {
-    GameStats mockReporter = mock(GameStats.class);
-    GameManager mgr = new GameManager(mockReporter);
+    GameStatsUI mockReporter = mock(GameStatsUI.class);
+    BasicGameManager mgr = new BasicGameManager(mockReporter);
 
     @Test
     public void winningIncrementsGamesWon() {

@@ -7,16 +7,15 @@ import java.awt.event.*;
 /**
  * Copyright (c) 2008 Kay Johansen
  */
-class GameFrame extends JFrame implements GameStats {
-    private final MarsLanderGame game;
+class GameFrame extends JFrame implements GameStatsUI {
     private final JLabel gamesWon;
     private final JLabel gamesLost;
 
     public GameFrame() {
         setLayout(new FlowLayout());
 
-        IGameManager manager = new GameManager(this);
-        game = new MarsLanderGame(450, 450, manager);
+        GameManager manager = new BasicGameManager(this);
+        final Game game = new Game(450, 450, manager);
         add(game);
 
         final JPanel controlPanel = new JPanel();
