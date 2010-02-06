@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class MarsLanderGame implements SpriteContainer {
+public class MarsLanderGame extends JComponent implements SpriteContainer {
     private final GameManager gameManager;
     private MarsLander lander;
     private Astronaut astronaut;
