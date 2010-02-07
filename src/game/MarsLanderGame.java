@@ -18,7 +18,6 @@ import java.awt.image.ImageObserver;
 public class MarsLanderGame implements SpriteContainer {
     private final WinLossStatsController winLossStats;
     private final GameUI uiComponent;
-    private final Rectangle bounds;
     private LanderController landerController;
     private AstronautController astronautController;
     private static final double CRASH_VELOCITY = 0.2;
@@ -32,7 +31,11 @@ public class MarsLanderGame implements SpriteContainer {
     public MarsLanderGame(int width, int height, GameUI uiComponent, WinLossStatsController winLossStats) {
         this.uiComponent = uiComponent;
         this.winLossStats = winLossStats;
-        bounds = new Rectangle(0, 0, width, height);
+        Rectangle bounds = new Rectangle(0, 0, width, height);
+        Astronaut astronautSprite = new Astronaut(new SpriteImageManager(), this, bounds);
+        astronautController = new AstronautController(astronautSprite);
+        MarsLander marsLanderSprite = new MarsLander(new SpriteImageManager(), this, bounds);
+        landerController = new LanderController(marsLanderSprite);
         startGame();
     }
 
@@ -70,10 +73,8 @@ public class MarsLanderGame implements SpriteContainer {
     }
 
     private void startGame() {
-        Astronaut astronautSprite = new Astronaut(new SpriteImageManager(), this, bounds);
-        astronautController = new AstronautController(astronautSprite);
-        MarsLander marsLanderSprite = new MarsLander(new SpriteImageManager(), this, bounds);
-        landerController = new LanderController(marsLanderSprite);
+        landerController.reset();
+        astronautController.reset();
         uiComponent.requestFocus();
     }
 

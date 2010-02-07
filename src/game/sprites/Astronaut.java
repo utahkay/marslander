@@ -28,6 +28,7 @@ public class Astronaut extends BasicSprite {
 
     public void showAstronaut() {
         setImage(astronaut);
+        astronautSteps = 0; //TODO Test for this
     }
 
     public void showAstronautWithFlag() {

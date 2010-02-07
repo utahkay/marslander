@@ -8,14 +8,12 @@ import java.awt.image.ImageObserver;
 
 public class LanderController {
     private final MarsLander lander;
-    private boolean isJetFiring = false;
+    private boolean isJetFiring;
     private static final double JET_ACCELERATION = 0.005;
 
     public LanderController(final MarsLander lander) {
         this.lander = lander;
-        setInitalParameters();
-        lander.start();
-        lander.showLander();
+        initialize();
     }
 
     public void jetOn() {
@@ -52,11 +50,23 @@ public class LanderController {
         return position;
     }
 
+    public void reset() {
+        requestStop();
+        initialize();
+    }
+
+    private void initialize() {
+        isJetFiring = false;
+        setInitalParameters();
+        lander.showLander();
+        lander.start();
+    }
+
     private void setInitalParameters() {
         lander.setPosition(new SpriteVector(100.0, 100.0));
         lander.setVelocity(new SpriteVector(0.095, 0.0));
         lander.setAcceleration(new SpriteVector(0.0, 0.003)); // Gravity
         lander.setCollisionLoss(0.95);
     }
-
+    
 }

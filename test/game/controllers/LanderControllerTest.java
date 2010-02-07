@@ -1,13 +1,11 @@
 package game.controllers;
 
-import org.junit.Test;
-import static org.junit.Assert.fail;
+import game.sprites.MarsLander;
 import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyDouble;
 import static org.mockito.Mockito.*;
-import game.sprites.MarsLander;
-import game.controllers.LanderController;
 import sprites.SpriteVector;
 
 import java.awt.*;
@@ -101,6 +99,38 @@ public class LanderControllerTest {
         when(mockLander.getSpriteSize()).thenReturn(20);
         SpriteVector expected = new SpriteVector(60, 50);
         assertEquals(expected, controller.startingPositionForAstronaut());
+    }
+
+    @Test
+    public void resetStopsSprite() {
+        controller.reset();
+        verify(mockLander).requestStop();
+    }
+
+    @Test
+    public void resetShowsCorrectSpriteImageAndStartsSprite() {
+        goToStateJetOff();
+        controller.reset();
+        verify(mockLander).showLander();
+        verify(mockLander).start();
+    }
+
+    @Test
+    public void resetSetsSpriteParameters() {
+        goToStateJetOff();
+        controller.reset();
+        verify(mockLander).setPosition(any(SpriteVector.class));
+        verify(mockLander).setVelocity(any(SpriteVector.class));
+        verify(mockLander).setAcceleration(any(SpriteVector.class));
+        verify(mockLander).setCollisionLoss(anyDouble());
+    }
+
+    @Test
+    public void resetTurnsJetOff() {
+        goToStateJetOn();
+        controller.reset();
+        controller.jetOff();
+        verify(mockLander, never()).changeAcceleration(any(SpriteVector.class));
     }
 
 }

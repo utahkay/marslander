@@ -25,11 +25,17 @@ public class AstronautController {
     public void startExcursion(SpriteVector startingPosition) {
         astronaut.setPosition(startingPosition);
         astronaut.setVelocity(new SpriteVector(0.15, 0.0));
+        astronaut.showAstronaut();
         isOutside = true;
         astronaut.start();
     }
 
     public boolean isAstronautOutside() {
         return isOutside;
+    }
+
+    public void reset() {
+        requestStop();
+        isOutside = false;
     }
 }

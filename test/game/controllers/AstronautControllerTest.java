@@ -4,6 +4,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.reset;
 import static org.mockito.Matchers.any;
 import game.sprites.Astronaut;
 import game.controllers.AstronautController;
@@ -49,8 +50,32 @@ public class AstronautControllerTest {
     }
 
     @Test
-    public void astronautOutside() {
+    public void astronautGoesOutside() {
         controller.startExcursion(startPosition);
         assertEquals(true, controller.isAstronautOutside());        
+    }
+
+    @Test
+    public void astronautGoesOutsideShowsAstronautWithoutFlag() {
+        controller.startExcursion(startPosition);
+        verify(mockAstronaut).showAstronaut();
+    }
+
+    @Test
+    public void resetStopsSprite() {
+        controller.reset();
+        verify(mockAstronaut).requestStop();
+    }
+
+    @Test
+    public void resetBringsAstronautInside() {
+        goToStateAstronautOutside();
+        controller.reset();
+        assertEquals(false, controller.isAstronautOutside());
+    }
+
+    private void goToStateAstronautOutside() {
+        controller.startExcursion(startPosition);
+        reset(mockAstronaut);        
     }
 }
