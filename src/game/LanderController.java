@@ -7,14 +7,15 @@ import java.awt.*;
 import java.awt.image.ImageObserver;
 
 public class LanderController {
-    private MarsLander lander;
-    private boolean isJetFiring;
+    private final MarsLander lander;
+    private boolean isJetFiring = false;
     private static final double JET_ACCELERATION = 0.005;
 
-    public LanderController(MarsLander lander) {
+    public LanderController(final MarsLander lander) {
         this.lander = lander;
         setInitalParameters();
         lander.start();
+        lander.showLander();
     }
 
     public void jetOn() {
@@ -41,19 +42,17 @@ public class LanderController {
         lander.showCrash();
     }
 
-    public void paint(Graphics g, ImageObserver observer) {
+    public void paint(final Graphics g, final ImageObserver observer) {
         lander.paint(g, observer);
     }
 
     public SpriteVector startingPositionForAstronaut() {
-        SpriteVector position = lander.getPosition();
+        final SpriteVector position = lander.getPosition();
         position.x += lander.getSpriteSize()/2;
         return position;
     }
 
     private void setInitalParameters() {
-        isJetFiring = false;
-        lander.showLander();
         lander.setPosition(new SpriteVector(100.0, 100.0));
         lander.setVelocity(new SpriteVector(0.095, 0.0));
         lander.setAcceleration(new SpriteVector(0.0, 0.003)); // Gravity

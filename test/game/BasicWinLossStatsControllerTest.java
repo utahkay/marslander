@@ -8,7 +8,7 @@ import game.ui.GameStatsUI;
 /**
  * Copyright (c) 2008 Kay Johansen
  */
-public class BasicGameManagerTest {
+public class BasicWinLossStatsControllerTest {
     GameStatsUI mockReporter = mock(GameStatsUI.class);
     BasicWinLossStatsController mgr = new BasicWinLossStatsController(mockReporter);
 
