@@ -1,18 +1,14 @@
 package game.controllers;
 
-import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Matchers.any;
 import game.sprites.Astronaut;
-import game.controllers.AstronautController;
+import static org.junit.Assert.assertEquals;
+import org.junit.Test;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.*;
+import sprites.SpriteVector;
 
 import java.awt.*;
 import java.awt.image.ImageObserver;
-
-import sprites.SpriteVector;
 
 /**
  * Copyright (c) 2008 Kay Johansen

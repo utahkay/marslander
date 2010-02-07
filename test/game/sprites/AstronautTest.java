@@ -1,15 +1,13 @@
 package game.sprites;
 
-import org.junit.Test;
-import org.junit.Before;
 import static org.junit.Assert.assertEquals;
+import org.junit.Before;
+import org.junit.Test;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.*;
+import sprites.ImageManager;
 
 import java.awt.*;
-
-import sprites.ImageManager;
-import game.sprites.Astronaut;
 
 
 /**

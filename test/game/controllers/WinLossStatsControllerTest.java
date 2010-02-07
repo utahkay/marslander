@@ -1,10 +1,9 @@
 package game.controllers;
 
+import game.ui.WinLossStatsUI;
 import org.junit.Test;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import game.ui.WinLossStatsUI;
-import game.controllers.WinLossStatsController;
 
 /**
  * Copyright (c) 2008 Kay Johansen
