@@ -1,4 +1,9 @@
-package game;
+package game.ui;
+
+import game.ui.GameComponent;
+import game.ui.GameStatsUI;
+import game.GameManager;
+import game.BasicGameManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -7,7 +12,7 @@ import java.awt.event.*;
 /**
  * Copyright (c) 2008 Kay Johansen
  */
-class GameFrame extends JFrame implements GameStatsUI {
+public class GameFrame extends JFrame implements GameStatsUI {
     private final JLabel gamesWon;
     private final JLabel gamesLost;
 
@@ -15,26 +20,27 @@ class GameFrame extends JFrame implements GameStatsUI {
         setLayout(new FlowLayout());
 
         GameManager manager = new BasicGameManager(this);
-        final Game game = new Game(450, 450, manager);
+        final GameComponent game = new GameComponent(450, 450, manager);
         add(game);
 
         final JPanel controlPanel = new JPanel();
         controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.Y_AXIS));
 
-        JButton startOverButton = new JButton("Start Over");
-        gamesWon = new JLabel();
-        gamesLost = new JLabel();
-        controlPanel.add(gamesWon);
-        controlPanel.add(gamesLost);
+        JButton startOverButton = new JButton("Play Again");
         controlPanel.add(startOverButton);
 
-        getRootPane().setDefaultButton(startOverButton);
+        gamesWon = new JLabel();
+        controlPanel.add(gamesWon);
+
+        gamesLost = new JLabel();
+        controlPanel.add(gamesLost);
 
         add(controlPanel);
 
+        getRootPane().setDefaultButton(startOverButton);
         startOverButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                game.restart();
+                game.startNewGame();
             }
         });
 
@@ -51,18 +57,6 @@ class GameFrame extends JFrame implements GameStatsUI {
                 game.requestFocusInWindow();
             }
         });
-
-        game.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                game.keyPressed();
-            }
-            @Override
-            public void keyReleased(KeyEvent e) {
-                game.keyReleased();
-            }
-        });
-
     }
 
     public void updateGameStats(final int numberGamesWon, final int numberGamesLost) {

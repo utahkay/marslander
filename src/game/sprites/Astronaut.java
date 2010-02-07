@@ -1,4 +1,4 @@
-package game;
+package game.sprites;
 
 import sprites.ImageManager;
 import sprites.SpriteContainer;

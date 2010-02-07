@@ -1,5 +1,7 @@
 package game;
 
+import game.ui.GameStatsUI;
+
 /**
  * Copyright (c) 2008 Kay Johansen
  */
