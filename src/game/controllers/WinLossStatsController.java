@@ -1,4 +1,4 @@
-package game;
+package game.controllers;
 
 import game.ui.WinLossStatsUI;
 

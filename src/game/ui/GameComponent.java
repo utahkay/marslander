@@ -1,7 +1,7 @@
 package game.ui;
 
 import game.MarsLanderGame;
-import game.WinLossStatsController;
+import game.controllers.WinLossStatsController;
 
 import javax.swing.*;
 import java.awt.*;

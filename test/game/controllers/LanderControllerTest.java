@@ -1,4 +1,4 @@
-package game;
+package game.controllers;
 
 import org.junit.Test;
 import static org.junit.Assert.fail;
@@ -7,6 +7,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyDouble;
 import static org.mockito.Mockito.*;
 import game.sprites.MarsLander;
+import game.controllers.LanderController;
 import sprites.SpriteVector;
 
 import java.awt.*;
