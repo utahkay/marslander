@@ -1,23 +1,38 @@
 package game.ui;
 
 import game.MarsLanderGame;
+import game.sprites.Astronaut;
+import game.sprites.MarsLander;
 import game.controllers.WinLossStatsController;
+import game.controllers.AstronautController;
+import game.controllers.LanderController;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import sprites.SpriteImageManager;
+import sprites.SpriteContainer;
+
 /**
  * Copyright (c) 2008 Kay Johansen
  */
-public class GameComponent extends JComponent implements GameUI {
+public class GameComponent extends JComponent implements SpriteContainer {
     private final MarsLanderGame game;
 
     public GameComponent(int width, int height, WinLossStatsController winLossStats) {
         setPreferredSize(new Dimension(width, height));
-        setBounds(0,0,width, height);
-        game = new MarsLanderGame(width, height, this, winLossStats);
+        Rectangle bounds = new Rectangle(0, 0, width, height);
+        setBounds(bounds);
+
+        MarsLander marsLanderSprite = new MarsLander(new SpriteImageManager(), this, bounds);
+        Astronaut astronautSprite = new Astronaut(new SpriteImageManager(), this, bounds);
+
+        LanderController landerController = new LanderController(marsLanderSprite);
+        AstronautController astronautController = new AstronautController(astronautSprite);
+
+        game = new MarsLanderGame(landerController, astronautController, winLossStats);
 
         addKeyListener(new KeyAdapter() {
             @Override
@@ -29,6 +44,8 @@ public class GameComponent extends JComponent implements GameUI {
                 game.keyReleased();
             }
         });
+
+        requestFocus();
     }
 
     public void startNewGame() {
@@ -39,4 +56,10 @@ public class GameComponent extends JComponent implements GameUI {
     protected void paintComponent(Graphics g) {
         game.paintSprites(g, this);
     }
+
+    // SpriteContainer method
+    public void hitBottom(double velocity) {
+        game.gameOver(velocity);
+    }
+
 }

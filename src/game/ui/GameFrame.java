@@ -16,10 +16,10 @@ public class GameFrame extends JFrame implements WinLossStatsUI {
     private final JLabel gamesWon;
     private final JLabel gamesLost;
 
-    public GameFrame() {
+    public GameFrame(final int width, final int height) {
         setLayout(new FlowLayout());
 
-        final GameComponent game = new GameComponent(450, 450, new WinLossStatsController(this));
+        final GameComponent game = new GameComponent(width, height, new WinLossStatsController(this));
         add(game);
 
         final JPanel controlPanel = new JPanel();

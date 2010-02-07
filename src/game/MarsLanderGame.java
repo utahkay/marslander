@@ -1,42 +1,32 @@
 package game;
 
-import game.sprites.Astronaut;
-import game.sprites.MarsLander;
-import game.ui.GameFrame;
-import game.ui.GameUI;
 import game.controllers.AstronautController;
 import game.controllers.LanderController;
 import game.controllers.WinLossStatsController;
-import sprites.SpriteContainer;
-import sprites.SpriteImageManager;
+import game.ui.GameFrame;
 import sprites.SpriteVector;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.image.ImageObserver;
 
-public class MarsLanderGame implements SpriteContainer {
+public class MarsLanderGame {
+    private final LanderController landerController;
+    private final AstronautController astronautController;
     private final WinLossStatsController winLossStats;
-    private final GameUI uiComponent;
-    private LanderController landerController;
-    private AstronautController astronautController;
     private static final double CRASH_VELOCITY = 0.2;
 
     public static void main(String[] args) {
-        JFrame frame = new GameFrame();
-        frame.setSize(600,450);
+        GameFrame frame = new GameFrame(450, 450);
+        frame.setSize(600, 450);
         frame.setVisible(true);
     }
 
-    public MarsLanderGame(int width, int height, GameUI uiComponent, WinLossStatsController winLossStats) {
-        this.uiComponent = uiComponent;
+    public MarsLanderGame(LanderController landerController,
+                          AstronautController astronautController,
+                          WinLossStatsController winLossStats) {
+        this.landerController = landerController;
+        this.astronautController = astronautController;
         this.winLossStats = winLossStats;
-        Rectangle bounds = new Rectangle(0, 0, width, height);
-        Astronaut astronautSprite = new Astronaut(new SpriteImageManager(), this, bounds);
-        astronautController = new AstronautController(astronautSprite);
-        MarsLander marsLanderSprite = new MarsLander(new SpriteImageManager(), this, bounds);
-        landerController = new LanderController(marsLanderSprite);
-        startGame();
     }
 
     public void keyPressed() {
@@ -52,7 +42,7 @@ public class MarsLanderGame implements SpriteContainer {
     public void startNewGame() {
         stopSprites();
         waitOneSecond();
-        startGame();
+        restartSprites();
     }
 
     public void paintSprites(Graphics g, ImageObserver observer) {
@@ -62,20 +52,19 @@ public class MarsLanderGame implements SpriteContainer {
         }
     }
 
-    // SpriteContainer method
-    public void hitBottom(final double velocity) {
-        stopGame(velocity < CRASH_VELOCITY);
+    public void gameOver(final double velocity) {
+        landerController.jetOff();
+        if (didPlayerWin(velocity)) {
+            win();
+        } else {
+            lose();
+        }
+        landerController.requestStop();
     }
 
-    // SpriteContainer method
-    public void repaint() {
-        uiComponent.repaint();
-    }
-
-    private void startGame() {
-        landerController.reset();
-        astronautController.reset();
-        uiComponent.requestFocus();
+    private void stopSprites() {
+        landerController.requestStop();
+        astronautController.requestStop();
     }
 
     private void waitOneSecond() {
@@ -86,31 +75,24 @@ public class MarsLanderGame implements SpriteContainer {
         }
     }
 
-    private void stopSprites() {
-        landerController.requestStop();
-        astronautController.requestStop();
+    private void restartSprites() {
+        landerController.reset();
+        astronautController.reset();
     }
 
-    private void stopGame(boolean didPlayerWin) {
-        landerController.jetOff();
-        if (didPlayerWin) {
-            showWin();
-        } else {
-            showLoss();
-        }
-        landerController.requestStop();
+    private boolean didPlayerWin(final double finalVelocity) {
+        return finalVelocity < CRASH_VELOCITY;
     }
 
-    private void showLoss() {
-        landerController.crash();
-        winLossStats.gameLost();
-    }
-
-    private void showWin() {
+    private void win() {
         SpriteVector position = landerController.startingPositionForAstronaut();
         astronautController.startExcursion(position);
         winLossStats.gameWon();
     }
 
+    private void lose() {
+        landerController.crash();
+        winLossStats.gameLost();
+    }
 }
 
