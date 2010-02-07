@@ -12,7 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.ImageObserver;
 
-public class Game implements SpriteContainer {
+public class MarsLanderGame implements SpriteContainer {
     private final WinLossStatsController winLossStats;
     private final GameUI uiComponent;
     private final Rectangle bounds;
@@ -26,7 +26,7 @@ public class Game implements SpriteContainer {
         frame.setVisible(true);
     }
 
-    public Game(int width, int height, GameUI uiComponent, WinLossStatsController winLossStats) {
+    public MarsLanderGame(int width, int height, GameUI uiComponent, WinLossStatsController winLossStats) {
         this.uiComponent = uiComponent;
         this.winLossStats = winLossStats;
         bounds = new Rectangle(0, 0, width, height);
