@@ -1,6 +1,6 @@
 package game.ui;
 
-import game.BasicWinLossStatsController;
+import game.WinLossStatsController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,14 +12,14 @@ import java.awt.event.WindowEvent;
 /**
  * Copyright (c) 2008 Kay Johansen
  */
-public class GameFrame extends JFrame implements GameStatsUI {
+public class GameFrame extends JFrame implements WinLossStatsUI {
     private final JLabel gamesWon;
     private final JLabel gamesLost;
 
     public GameFrame() {
         setLayout(new FlowLayout());
 
-        final GameComponent game = new GameComponent(450, 450, new BasicWinLossStatsController(this));
+        final GameComponent game = new GameComponent(450, 450, new WinLossStatsController(this));
         add(game);
 
         final JPanel controlPanel = new JPanel();

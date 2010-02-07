@@ -3,14 +3,14 @@ package game;
 import org.junit.Test;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import game.ui.GameStatsUI;
+import game.ui.WinLossStatsUI;
 
 /**
  * Copyright (c) 2008 Kay Johansen
  */
-public class BasicWinLossStatsControllerTest {
-    GameStatsUI mockReporter = mock(GameStatsUI.class);
-    BasicWinLossStatsController mgr = new BasicWinLossStatsController(mockReporter);
+public class WinLossStatsControllerTest {
+    WinLossStatsUI mockReporter = mock(WinLossStatsUI.class);
+    WinLossStatsController mgr = new WinLossStatsController(mockReporter);
 
     @Test
     public void winningIncrementsGamesWon() {
