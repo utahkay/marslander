@@ -18,10 +18,11 @@ public class Astronaut extends BasicSprite {
     private final Image astronautWithFlag;
     private int astronautSteps = 0;
 
-    public Astronaut(final ImageManager images, final SpriteContainer container) {
+    public Astronaut(final ImageManager images, final SpriteContainer container, Rectangle bounds) {
         super(container);
         astronaut = images.load(ASTRONAUT_IMAGE_PATH);
         astronautWithFlag = images.load(ASTRONAUT__WITH_FLAG_IMAGE_PATH);
+        setBounds(bounds);
         showAstronaut();
     }
 

@@ -17,7 +17,7 @@ public class Game implements SpriteContainer {
     private final GameUI uiComponent;
     private final Rectangle bounds;
     private LanderController landerController;
-    private Astronaut astronaut;
+    private AstronautController astronautController;
     private static final double CRASH_VELOCITY = 0.2;
 
     public static void main(String[] args) {
@@ -34,7 +34,7 @@ public class Game implements SpriteContainer {
     }
 
     public void keyPressed() {
-        if (astronaut == null) {
+        if (!astronautController.isAstronautOutside()) {
             landerController.jetOn();
         }
     }
@@ -51,8 +51,8 @@ public class Game implements SpriteContainer {
 
     public void paintSprites(Graphics g, ImageObserver observer) {
         landerController.paint(g, observer);
-        if (astronaut != null) {
-            astronaut.paint(g, observer);
+        if (astronautController.isAstronautOutside()) {
+            astronautController.paint(g, observer);
         }
     }
 
@@ -67,9 +67,10 @@ public class Game implements SpriteContainer {
     }
 
     private void startGame() {
-        astronaut = null;
-        MarsLander lander = new MarsLander(new SpriteImageManager(), this, bounds);
-        landerController = new LanderController(lander);
+        Astronaut astronautSprite = new Astronaut(new SpriteImageManager(), this, bounds);
+        astronautController = new AstronautController(astronautSprite);
+        MarsLander marsLanderSprite = new MarsLander(new SpriteImageManager(), this, bounds);
+        landerController = new LanderController(marsLanderSprite);
         uiComponent.requestFocus();
     }
 
@@ -81,20 +82,9 @@ public class Game implements SpriteContainer {
         }
     }
 
-    private Astronaut createAstronautSprite() {
-        SpriteVector position = landerController.startingPositionForAstronaut();
-        Astronaut sprite = new Astronaut(new SpriteImageManager(), this);
-        sprite.setBounds(bounds);
-        sprite.setPosition(position);
-        sprite.setVelocity(new SpriteVector(0.15, 0.0));
-        return sprite;
-    }
-
     private void stopSprites() {
         landerController.requestStop();
-        if (astronaut != null) {
-            astronaut.requestStop();
-        }
+        astronautController.requestStop();
     }
 
     private void stopGame(boolean didPlayerWin) {
@@ -113,8 +103,8 @@ public class Game implements SpriteContainer {
     }
 
     private void showWin() {
-        astronaut = createAstronautSprite();
-        astronaut.start();
+        SpriteVector position = landerController.startingPositionForAstronaut();
+        astronautController.startExcursion(position);
         winLossStats.gameWon();
     }
 

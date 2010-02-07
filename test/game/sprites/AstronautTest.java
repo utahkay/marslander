@@ -18,6 +18,7 @@ import game.sprites.Astronaut;
 public class AstronautTest {
     ImageManager mockImageManager = mock(ImageManager.class);
     Image mockImage = mock(Image.class);
+    Rectangle bounds;
 
     @Before
     public void imageManagerReturnsMockImage() {
@@ -26,7 +27,7 @@ public class AstronautTest {
 
     @Test
     public void loadsImagesWhenConstructed() {
-        new Astronaut(mockImageManager, null);
+        new Astronaut(mockImageManager, null, bounds);
         verify(mockImageManager).load(contains("astronaut.gif"));
         verify(mockImageManager).load(contains("astronaut_flag.gif"));
     }
@@ -34,7 +35,7 @@ public class AstronautTest {
     @Test
     public void setsInitialImageWhenConstructed() {
         when(mockImage.getHeight(null)).thenReturn(100);
-        Astronaut astronaut = new Astronaut(mockImageManager, null);
+        Astronaut astronaut = new Astronaut(mockImageManager, null, bounds);
         assertEquals(100, astronaut.getSpriteSize());        
     }
 
