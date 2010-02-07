@@ -74,9 +74,17 @@ public class LanderControllerTest {
     }
 
     @Test
-    public void passThroughRequestStop() {
+    public void requestStop() {
         controller.requestStop();
         verify(mockLander).requestStop();
+    }
+
+    @Test
+    public void requestStopTurnsTheJetOffIfItsOn() {
+        goToStateJetOn();
+        controller.requestStop();
+        verify(mockLander).showLander();
+        verify(mockLander).changeAcceleration(any(SpriteVector.class));
     }
 
     @Test
@@ -129,8 +137,8 @@ public class LanderControllerTest {
     public void resetTurnsJetOff() {
         goToStateJetOn();
         controller.reset();
-        controller.jetOff();
-        verify(mockLander, never()).changeAcceleration(any(SpriteVector.class));
+        verify(mockLander, atLeastOnce()).showLander();
+        verify(mockLander).changeAcceleration(any(SpriteVector.class));
     }
 
 }

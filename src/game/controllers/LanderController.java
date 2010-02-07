@@ -33,6 +33,7 @@ public class LanderController {
     }
 
     public void requestStop() {
+        jetOff();
         lander.requestStop();
     }
 

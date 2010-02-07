@@ -21,9 +21,7 @@ public class MarsLanderGame {
         frame.setVisible(true);
     }
 
-    public MarsLanderGame(LanderController landerController,
-                          AstronautController astronautController,
-                          WinLossStatsController winLossStats) {
+    public MarsLanderGame(LanderController landerController, AstronautController astronautController, WinLossStatsController winLossStats) {
         this.landerController = landerController;
         this.astronautController = astronautController;
         this.winLossStats = winLossStats;
@@ -39,12 +37,6 @@ public class MarsLanderGame {
         landerController.jetOff();
     }
 
-    public void startNewGame() {
-        stopSprites();
-        waitOneSecond();
-        restartSprites();
-    }
-
     public void paintSprites(Graphics g, ImageObserver observer) {
         landerController.paint(g, observer);
         if (astronautController.isAstronautOutside()) {
@@ -53,13 +45,18 @@ public class MarsLanderGame {
     }
 
     public void gameOver(final double velocity) {
-        landerController.jetOff();
         if (didPlayerWin(velocity)) {
             win();
         } else {
             lose();
         }
         landerController.requestStop();
+    }
+
+    public void startNewGame() {
+        stopSprites();
+        waitOneSecond();
+        restartSprites();
     }
 
     private void stopSprites() {
