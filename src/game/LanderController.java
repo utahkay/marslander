@@ -1,8 +1,6 @@
 package game;
 
 import game.sprites.MarsLander;
-import sprites.SpriteContainer;
-import sprites.SpriteImageManager;
 import sprites.SpriteVector;
 
 import java.awt.*;
@@ -13,9 +11,8 @@ public class LanderController {
     private boolean isJetFiring;
     private static final double JET_ACCELERATION = 0.005;
 
-    public LanderController(SpriteContainer spriteContainer, Rectangle bounds) {
-        lander = new MarsLander(new SpriteImageManager(), spriteContainer);
-        lander.setBounds(bounds);
+    public LanderController(MarsLander lander) {
+        this.lander = lander;
         setInitalParameters();
         lander.start();
     }

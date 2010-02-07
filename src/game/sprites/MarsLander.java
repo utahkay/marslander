@@ -18,11 +18,12 @@ public class MarsLander extends BasicSprite {
     private final Image landerWithFlame;
     private final Image crash;
 
-    public MarsLander(final ImageManager images, final SpriteContainer container) {
+    public MarsLander(final ImageManager images, final SpriteContainer container, Rectangle bounds) {
         super(container);
         lander = images.load(LANDER_IMAGE_PATH);
         landerWithFlame = images.concatImagesVertically(lander, images.load(FLAMES_IMAGE_PATH));
         crash = images.load(CRASH_IMAGE_PATH);
+        setBounds(bounds);
         showLander();
     }
 

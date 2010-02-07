@@ -1,6 +1,7 @@
 package game;
 
 import game.sprites.Astronaut;
+import game.sprites.MarsLander;
 import game.ui.GameFrame;
 import game.ui.GameUI;
 import sprites.SpriteContainer;
@@ -67,7 +68,8 @@ public class Game implements SpriteContainer {
 
     private void startGame() {
         astronaut = null;
-        landerController = new LanderController(this, bounds);
+        MarsLander lander = new MarsLander(new SpriteImageManager(), this, bounds);
+        landerController = new LanderController(lander);
         uiComponent.requestFocus();
     }
 
