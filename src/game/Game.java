@@ -13,7 +13,7 @@ import game.sprites.Astronaut;
 import game.sprites.MarsLander;
 
 public class Game implements SpriteContainer {
-    private final GameManager gameManager;
+    private final WinLossStatsController winLossStats;
     private final GameUI uiComponent;
     private final Rectangle bounds;
     private MarsLander lander;
@@ -28,9 +28,9 @@ public class Game implements SpriteContainer {
         frame.setVisible(true);
     }
 
-    public Game(int width, int height, GameUI uiComponent, GameManager manager) {
+    public Game(int width, int height, GameUI uiComponent, WinLossStatsController winLossStats) {
         this.uiComponent = uiComponent;
-        this.gameManager = manager;
+        this.winLossStats = winLossStats;
         bounds = new Rectangle(0, 0, width, height);
         startGame();
     }
@@ -132,21 +132,21 @@ public class Game implements SpriteContainer {
         }
         if (didPlayerWin) {
             showWin();
-            gameManager.gameWon();
         } else {
             showLoss();
-            gameManager.gameLost();
         }
         lander.requestStop();
     }
 
     private void showLoss() {
         lander.showCrash();
+        winLossStats.gameLost();
     }
 
     private void showWin() {
         astronaut = createAstronautSprite();
         astronaut.start();
+        winLossStats.gameWon();
     }
 
 }

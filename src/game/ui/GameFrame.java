@@ -1,13 +1,13 @@
 package game.ui;
 
-import game.ui.GameComponent;
-import game.ui.GameStatsUI;
-import game.GameManager;
-import game.BasicGameManager;
+import game.BasicWinLossStatsController;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
  * Copyright (c) 2008 Kay Johansen
@@ -19,8 +19,7 @@ public class GameFrame extends JFrame implements GameStatsUI {
     public GameFrame() {
         setLayout(new FlowLayout());
 
-        GameManager manager = new BasicGameManager(this);
-        final GameComponent game = new GameComponent(450, 450, manager);
+        final GameComponent game = new GameComponent(450, 450, new BasicWinLossStatsController(this));
         add(game);
 
         final JPanel controlPanel = new JPanel();

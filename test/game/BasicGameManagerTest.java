@@ -10,7 +10,7 @@ import game.ui.GameStatsUI;
  */
 public class BasicGameManagerTest {
     GameStatsUI mockReporter = mock(GameStatsUI.class);
-    BasicGameManager mgr = new BasicGameManager(mockReporter);
+    BasicWinLossStatsController mgr = new BasicWinLossStatsController(mockReporter);
 
     @Test
     public void winningIncrementsGamesWon() {

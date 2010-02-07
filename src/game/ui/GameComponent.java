@@ -1,8 +1,7 @@
 package game.ui;
 
-import game.ui.GameUI;
 import game.Game;
-import game.GameManager;
+import game.WinLossStatsController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,10 +14,10 @@ import java.awt.event.KeyEvent;
 public class GameComponent extends JComponent implements GameUI {
     private final Game game;
 
-    public GameComponent(int width, int height, GameManager manager) {
+    public GameComponent(int width, int height, WinLossStatsController winLossStats) {
         setPreferredSize(new Dimension(width, height));
         setBounds(0,0,width, height);
-        game = new Game(width, height, this, manager);
+        game = new Game(width, height, this, winLossStats);
 
         addKeyListener(new KeyAdapter() {
             @Override

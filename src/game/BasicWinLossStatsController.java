@@ -5,12 +5,12 @@ import game.ui.GameStatsUI;
 /**
  * Copyright (c) 2008 Kay Johansen
  */
-public class BasicGameManager implements GameManager {
+public class BasicWinLossStatsController implements WinLossStatsController {
     GameStatsUI gameStatsUI;
     private int numberGamesWon = 0;
     private int numberGamesLost = 0;
 
-    public BasicGameManager(GameStatsUI gameStatsUI) {
+    public BasicWinLossStatsController(GameStatsUI gameStatsUI) {
         this.gameStatsUI = gameStatsUI;
     }
 
